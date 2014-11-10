@@ -22,14 +22,11 @@ $twitter = new TwitterOauth($consumer,$consumerSecret,$accessToken,$accessTokenS
 <?php
 if( isset($_POST['keyword'])){
 $tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q='.$_POST['keyword'].'&result_type=recent');
-	// foreach($tweets as $tweet){
-		//foreach ($tweet as $t) {
-			print_r($tweets); 
-			//echo "<br>";
-
-					# code...
-		//}
-	//}
+	 foreach($tweets as $tweet){
+	foreach ($tweet as $t) {
+	echo $t->text."<br />" ;
+			}
+	}
 }
 	
 //<?php print_r($tweets);?>
