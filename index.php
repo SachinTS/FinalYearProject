@@ -20,17 +20,20 @@ $twitter = new TwitterOauth($consumer,$consumerSecret,$accessToken,$accessTokenS
 		<label> Search : <input type ="" name="keyword"/></label>	
 
 <?php
+$i=0;
+$abc = array();
 if( isset($_POST['keyword'])){
 $tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q='.$_POST['keyword'].'&result_type=recent');
 	 foreach($tweets as $tweet){
 	foreach ($tweet as $t) {
-	echo $t->text."<br />" ;
-			}
+		 if(isset($t->text)) echo $t->text."<br />";
+			if(isset($t->text)) {$abc[$i]=$t->text;
+			$i++;}
+				}
 	}
 }
-	
-//<?php print_r($tweets);?>
-
-
+?>
+<b>We will show a random tweet </b><br/><br/>
+<?php if(isset($abc[4])) echo $abc[4]; ?>
 </body>
 </html>
