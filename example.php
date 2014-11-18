@@ -2,45 +2,26 @@
 <html>
 <meta charset="UTF-8">
 <head><title>Sentiment-Analysis</title>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+
 <style>
-body, textarea {
-    font-family: Helvetica, Arial, sans-serif;
-    width: 300px;
-    margin: 10px auto;
-    font-size: 13px;
-}
+
 .progress-wrapper {
     border: 1px solid #CCC;
     height: 15px;
     width: 100%;
 }
 .progress {
-    background: #DDD;
+    background: #0184ff;
     height: 100%;
     width: 0%;
 }
 
-textarea, button {
-    border: 1px solid #CCC;
-}
 
-textarea {
-    padding: 10px;
-    resize: none;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-top: 0;
-}
-
-button {
-    background: white;
-    padding: 5px;
-    cursor: pointer;
-}
 </style>
 </head>
 <body>
-
+<form action="" method="POST">
     <p>Training progress: <span id="trainingProgressValue">0</span>%</p>
     <div class="progress-wrapper">
         <div class="progress" id="trainingProgressBar"></div>
@@ -50,12 +31,14 @@ button {
     <div class="progress-wrapper">
         <div class="progress" id="testResultsBar"></div>
     </div>
-    
+    <div class="inset">
     <p>Test your own:</p>
-    <textarea id="testBox" placeholder="eg: The director is a master at manupulating your emotions, making you laugh and cry."></textarea>
+    
+    <textarea id="testBox" placeholder="Social Media Posts"><?php session_start(); $abc=$_SESSION['twt']; echo $abc ; ?></textarea>
     <button id="testButton">Guess Sentiment</button>
     <p id="testResult" style="display:none;">Guess: <span id="testResultLabel"></span> (<span id="testResultProbability"></span>% probability)</p>
-
+    </div>
+    </form>
 <script type="text/javascript">
 /* Source: https://github.com/kristopolous/Porter-Stemmer */
 var stemmer=function(){function h(){}function i(){console.log(Array.prototype.slice.call(arguments).join(" "))}var j={ational:"ate",tional:"tion",enci:"ence",anci:"ance",izer:"ize",bli:"ble",alli:"al",entli:"ent",eli:"e",ousli:"ous",ization:"ize",ation:"ate",ator:"ate",alism:"al",iveness:"ive",fulness:"ful",ousness:"ous",aliti:"al",iviti:"ive",biliti:"ble",logi:"log"},k={icate:"ic",ative:"",alize:"al",iciti:"ic",ical:"ic",ful:"",ness:""};return function(a,l){var d,b,g,c,f,e;e=l?i:h;if(3>a.length)return a;

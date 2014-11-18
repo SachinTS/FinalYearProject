@@ -14,26 +14,40 @@ $twitter = new TwitterOauth($consumer,$consumerSecret,$accessToken,$accessTokenS
 			Twitter feeds
 
 		</title>
-	</head>
+		 <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
 	<body>
 		<form action="" method="POST">
-		<label> Search : <input type ="" name="keyword"/></label>	
+		<div class="inset">
+		<label> Search : <input type ="text" name="keyword"/></label>	
+		</div>
 
 <?php
 $i=0;
 $abc = array();
 if( isset($_POST['keyword'])){
-$tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q='.$_POST['keyword'].'&result_type=recent');
+$tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q='.$_POST['keyword'].'&result_type=popular&lang=en');
 	 foreach($tweets as $tweet){
 	foreach ($tweet as $t) {
-		 if(isset($t->text)) echo $t->text."<br />";
+		 if(isset($t->text)) echo "<br/>".$t->text."<br />";
 			if(isset($t->text)) {$abc[$i]=$t->text;
 			$i++;}
 				}
 	}
 }
 ?>
-<b>We will show a random tweet </b><br/><br/>
-<?php if(isset($abc[4])) echo $abc[4]; ?>
+<br/><br/>
+<?php 
+session_start();
+if(isset($abc[0]))
+$_SESSION['twt']=$abc[0];
+?>
+<input type="button" id="abutton" value="Next" onclick="return move()" />
+<script>
+function move()
+{
+window.location="example.php";
+}
+</script>
 </body>
 </html>
